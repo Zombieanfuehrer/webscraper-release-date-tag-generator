@@ -34,6 +34,8 @@ def main():
         return
 
     release_date_edition = grabbed[0]
+    print(f"Extracted string: {grabbed[0]}")
+
     formatted_date = DateFormatter.format_date(release_date_edition)
 
 

@@ -26,19 +26,27 @@ def main():
     private_token = args.private_token
     pattern = args.regex
 
+
+
     web_scrapper = WebScrapper(url)
+
+    release_date_edition = None
     try:
-        grabbed = web_scrapper.scrap_string(pattern)
+        release_date_edition = web_scrapper.scrap_string(pattern)
     except Exception as e:
         print(e)
         return
 
-    release_date_edition = grabbed[0]
-    print(f"Extracted string: {grabbed[0]}")
+    print(f"Extracted string: {release_date_edition}")
 
-    formatted_date = DateFormatter.format_date(release_date_edition)
+    formatted_date = None
+    try:
+        formatted_date = DateFormatter.format_date(release_date_edition)
+    except Exception as e:
+        print(e)
+        return
 
-
+    print(f"Formatted date: {formatted_date}")
     git_lab_tag_manager = GitLabTagManager(project_id, private_token)
     if git_lab_tag_manager.tag_exists(formatted_date):
         print(f"Tag '{formatted_date}' already exists.")

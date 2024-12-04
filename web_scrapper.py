@@ -15,7 +15,7 @@ class WebScrapper:
             text = soup.get_text()
             match = re.search(regex, text)
             if match:
-                return match.group()
+                return match.group(1)
             else:
                 raise Exception(f"Failed to find the pattern: {regex}")
         else:
